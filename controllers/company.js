@@ -16,7 +16,7 @@ const handleCompanyListGet = (req, res, db) => {
   db.select('*').from('companies')
     .then(companies => {
       if (companies.length > 0) {
-        res.json(companies[0])
+        res.json(companies)
       } else {
         res.status(400).json('Not found')
       }
@@ -25,24 +25,33 @@ const handleCompanyListGet = (req, res, db) => {
 }
 
 const handleCompanyUpdate = (req, res, db) => {
-  const {name, location, industry, ceo, employees} = req.params;
+  const {name, location, industry, ceo, employees} = req.body.company;
 
-  db('companies').where({name: name}).update([{name: name}, {location: location}, {industry: industry}, {ceo: ceo}, {employees: employees}])
-  .catch(err => res.status(400).json('error inserting company'));
+  db('companies').where({name: name}).update({location: location, industry: industry, ceo: ceo, employees: employees})
+  .then(() => {
+    res.json('successs');
+  })  
+  .catch(console.log);
 }
 
 const handleCompanyInsert = (req, res, db) => {
-  const {name, location, industry, ceo, employees} = req.params;
-
-  db('companies').insert([{name: name}, {location: location}, {industry: industry}, {ceo: ceo}, {employees: employees}])
-  .catch(err => res.status(400).json('error inserting company'));
+  const {name, location, industry, ceo, employees} = req.body.company;
+  
+  db('companies').insert([{name: name, location: location, industry: industry, ceo: ceo, employees: employees}])
+  .then(() => {
+    res.json('successs');
+  })  
+  .catch(console.log);
 }
 
 const handleCompanyDelete = (req, res, db) => {
   const {name} = req.params;
 
-  db('companies').where('name', {name}).del()
-  .catch(err => res.status(400).json('error deleting company'));
+  db('companies').where('name', name).del()
+  .then(() => {
+    res.json('successs');
+  })  
+  .catch(console.log);
 }
 
 module.exports = {
