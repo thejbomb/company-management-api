@@ -21,7 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res)=> { res.send('it is working!') });
-app.post('/company/:name', (req, res) => {company.handleCompanyGet(req, res, db)});
+app.get('/company/:name', (req, res) => {company.handleCompanyGet(req, res, db)});
 app.get('/companyAll', (req, res) => {company.handleCompanyListGet(req, res, db)});
 app.post('/insert', (req, res) => {company.handleCompanyInsert(req, res, db)});
 app.delete('/company/:name', (req, res) => {company.handleCompanyDelete(req, res, db)});
