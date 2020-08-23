@@ -1,6 +1,6 @@
 const handleCompanyGet = (req, res, db) => {
   const {name} = req.params;
-  console.log(name)
+
   db('companies').where('name', {name})
     .then(company => {
       if (company.length > 0) {
@@ -25,15 +25,24 @@ const handleCompanyListGet = (req, res, db) => {
 }
 
 const handleCompanyUpdate = (req, res, db) => {
+  const {name, location, industry, ceo, employees} = req.params;
 
+  db('companies').where({name: name}).update([{name: name}, {location: location}, {industry: industry}, {ceo: ceo}, {employees: employees}])
+  .catch(err => res.status(400).json('error inserting company'));
 }
 
 const handleCompanyInsert = (req, res, db) => {
+  const {name, location, industry, ceo, employees} = req.params;
 
+  db('companies').insert([{name: name}, {location: location}, {industry: industry}, {ceo: ceo}, {employees: employees}])
+  .catch(err => res.status(400).json('error inserting company'));
 }
 
 const handleCompanyDelete = (req, res, db) => {
+  const {name} = req.params;
 
+  db('companies').where('name', {name}).del()
+  .catch(err => res.status(400).json('error deleting company'));
 }
 
 module.exports = {

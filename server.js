@@ -24,8 +24,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res)=> { res.send('it is working!') });
-app.get('/company/:name', (req, res) => {company.handleCompanyGet(req, res, db)});
+app.post('/company/:name', (req, res) => {company.handleCompanyGet(req, res, db)});
 app.get('/companyAll', (req, res) => {company.handleCompanyListGet(req, res, db)});
+app.post('/insert', (req, res) => {company.handleCompanyInsert(req, res, db)});
+app.delete('/company/:name', (req, res) => {company.handleCompanyDelete(req, res, db)});
+app.put('/company/:name', (req, res) => {company.handleCompanyUpdate(req, res, db)});
 
 app.listen(3001, () => {
     console.log('app running on 3001');
