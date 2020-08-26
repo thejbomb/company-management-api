@@ -1,8 +1,6 @@
 # company-management-api
 This project (back-end) manages company data, such as creates new entries of companies, edit/deletes existing data.
 
-http://dailystocks.info
-
 ## Getting started
 
 Clone the repository for local development.
@@ -19,3 +17,7 @@ Before you're ready to start development, you need to change the database info t
 ## Built with
 
 This project is built with Nodejs, Express, PostgreSQL.
+
+# Scripts
+
+Start the server with npm start
