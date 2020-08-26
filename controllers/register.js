@@ -18,7 +18,6 @@ const handleRegister = (req, res, db, bcrypt) => {
     bcrypt.hash(password, salt, function(err, hash) {
       db('cred').returning('email').insert([{email, email, password: hash}])
       .then((email) => {
-        console.log(email)
         res.json(email);
       })
       .catch(err => res.status(400).json('unable to register'))
